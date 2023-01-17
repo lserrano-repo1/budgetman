@@ -1,0 +1,27 @@
+services:
+  frontend:
+    image: budgetman-webapp:1.0.0
+    ports: 
+        - 8888:80
+  backend:
+    image: budgetman-backend:1.0.0
+    ports:
+      - 8500:8500
+    environment:
+      - DB_USER=budgetman
+      - DB_PASSWORD=budgetman
+      - DB_CONNECT_STRING=appdatabase:1521/xepdb1
+    restart: always
+  appdatabase:
+    image: gvenzl/oracle-xe:21.3.0
+    ports: 
+      - 1522:1521
+    environment:
+      - ORACLE_PASSWORD=mypass
+      - APP_USER=budgetman
+      - APP_USER_PASSWORD=budgetman
+    volumes:
+      - oradata:/opt/oracle/oradata #pesistence file-folder
+      - ./database:/container-entrypoint-initdb.d #initialize db
+volumes:
+  oradata:
