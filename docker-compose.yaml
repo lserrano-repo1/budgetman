@@ -16,10 +16,8 @@ services:
     image: gvenzl/oracle-xe:21.3.0
     ports: 
       - 1522:1521
-    environment:
-      - ORACLE_PASSWORD=mypass
-      - APP_USER=budgetman
-      - APP_USER_PASSWORD=budgetman
+    env_file:
+      - ./database/.env
     volumes:
       - oradata:/opt/oracle/oradata #pesistence file-folder
       - ./database:/container-entrypoint-initdb.d #initialize db
