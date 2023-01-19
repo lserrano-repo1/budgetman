@@ -20,6 +20,6 @@ services:
       - ./database/.env
     volumes:
       - oradata:/opt/oracle/oradata #pesistence file-folder
-      - ./database:/container-entrypoint-initdb.d #initialize db
+      - ./database:/container-entrypoint-initdb.d #initialize db, mount point
 volumes:
   oradata:

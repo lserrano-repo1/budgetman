@@ -19,7 +19,10 @@ spec:
           - name: DB_USER
             value: budgetman
           - name: DB_PASSWORD
-            value: budgetman
+            valueFrom:
+              secretKeyRef:    
+                name: db-secret
+                key: app_pass # value: budgetman
           - name: DB_CONNECT_STRING
             value: database-service:1521/xepdb1
         resources:
